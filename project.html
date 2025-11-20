@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Class Project | Dhrut Buch</title>
+  <!-- Same font as index.html for consistency -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f4f5fb;
+      --card-bg: #ffffff;
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.08);
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --border-subtle: #e2e8f0;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius-lg: 1.5rem;
+      --radius-pill: 999px;
+      --transition-fast: 160ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #e0ebff 0, #f4f5fb 45%, #f4f5fb 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      padding: 1.5rem;
+    }
+
+    .shell {
+      max-width: 960px;
+      width: 100%;
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .pill {
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 2rem;
+      box-shadow: var(--shadow-soft);
+      padding: 2.25rem 2.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 3vw, 2.4rem);
+      line-height: 1.1;
+    }
+
+    .tagline {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .description {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      max-width: 40rem;
+      line-height: 1.6;
+    }
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .info-chip {
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-pill);
+      background: #f9fafb;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .materials {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1.75rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      gap: 1.75rem;
+    }
+
+    .materials-heading {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .materials-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 20rem;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .material-card {
+      padding: 1rem 1.1rem;
+      border-radius: 1.1rem;
+      border: 1px solid var(--border-subtle);
+      background: #f9fafb;
+      text-decoration: none;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .material-card.primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .material-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+    }
+
+    .material-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .material-desc {
+      font-size: 0.86rem;
+      opacity: 0.9;
+    }
+
+    .material-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.16);
+      border-color: rgba(37, 99, 235, 0.45);
+      background: #ffffff;
+    }
+
+    .material-card.primary:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.38);
+    }
+
+    .arrow {
+      font-size: 1.15rem;
+    }
+
+    footer {
+      margin-top: 1.25rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .card {
+        padding: 1.8rem 1.5rem 2rem;
+      }
+
+      .materials {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .materials-text {
+        max-width: 100%;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="breadcrumb">
+        <!-- TODO: If your index page path changes, update this link -->
+        <a href="index.html">← Back to main page</a>
+      </div>
+    </header>
+
+    <main class="card">
+      <section class="top">
+        <!-- TODO: You can adjust the title if your project has a specific name -->
+        <h1>AI Class Project</h1>
+
+        <!-- Optional short tagline under the title -->
+        <p class="tagline">
+          Exploring how artificial intelligence is transforming economics, decision-making, and the limited-service restaurant industry.
+        </p>
+
+        <!-- TODO: Replace this placeholder paragraph with your actual project overview (3–5 sentences) -->
+        <p class="description">
+          This project explores the expanding role of artificial intelligence in the limited-service restaurant (LSR) industry, focusing on its effects on logistics, labor, forecasting, and operational efficiency. AI technologies are increasingly embedded in tools such as demand prediction models, automated scheduling systems, and intelligent supply-chain platforms. The project investigates how these applications reshape daily operations and long-term strategic planning, enabling firms to reduce waste, optimize labor, and improve delivery reliability. It also highlights how variability in AI adoption influences competition, with some firms leveraging advanced analytics to gain meaningful operational advantages. Overall, the project provides a detailed overview of the opportunities and challenges AI presents as it becomes central to LSR business operations.
+        </p>
+
+      </section>
+
+      <section class="materials">
+        <div>
+          <h2 class="materials-heading">Project Materials</h2>
+          <p class="materials-text">
+            Below are the main artifacts for this project. As I refine the work,
+            updated versions of the slides and written report will be linked here.
+          </p>
+        </div>
+
+        <div class="cards">
+          <!-- Presentation slides card -->
+          <!-- TODO: Replace "#" with the actual link once your slides are uploaded -->
+          <a class="material-card" href="#" target="_blank" rel="noopener">
+            <div class="material-label">Slides</div>
+            <div class="material-title">
+              Presentation Slides
+              <span class="arrow">↗</span>
+            </div>
+            <div class="material-desc">
+              Slide deck summarizing key questions, data, methods, and takeaways
+              from the AI in Economics project. (Link coming soon.)
+            </div>
+          </a>
+
+          <!-- Project report card -->
+          <!-- TODO: Ensure project.pdf exists at the correct path -->
+          <a class="material-card primary" href="project.pdf" target="_blank" rel="noopener">
+            <div class="material-label">Report</div>
+            <div class="material-title">
+              Project Report (PDF)
+              <span class="arrow">↗</span>
+            </div>
+            <div class="material-desc">
+              Full written report with background, data sources, methods, results,
+              and reflections on the role of AI in the chosen industry.
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> <!-- TODO: You can hardcode your name if you like -->Dhrut Buch · AI in Economics Project
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

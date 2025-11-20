@@ -1,10 +1,340 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Dhrut's AI490 Site</title>
-    </head>
-    <body>
-        <h1>Hello from my first webpage!</h1>
-        <p>This page will later host my coursework!</p>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhrut Buch | AI & Economics</title>
+  <!-- Optional Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f4f5fb;
+      --card-bg: #ffffff;
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.08);
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --border-subtle: #e2e8f0;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius-lg: 1.5rem;
+      --radius-pill: 999px;
+      --transition-fast: 160ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #e0ebff 0, #f4f5fb 45%, #f4f5fb 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      padding: 1.5rem;
+    }
+
+    .shell {
+      max-width: 960px;
+      width: 100%;
+      margin: auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 2rem;
+      box-shadow: var(--shadow-soft);
+      padding: 2.25rem 2.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .content {
+      flex: 2;
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-pill);
+      background: var(--primary-soft);
+      color: #1d4ed8;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.2rem;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #1d4ed8;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 3vw, 2.6rem);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .subheading {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      max-width: 36rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .meta-chip {
+      padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-pill);
+      background: #f9fafb;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .action-card {
+      flex: 1 1 180px;
+      min-width: 0;
+      padding: 1rem 1.2rem;
+      border-radius: 1.1rem;
+      border: 1px solid var(--border-subtle);
+      background: #f9fafb;
+      text-decoration: none;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .action-card.primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .action-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.8;
+    }
+
+    .action-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .action-desc {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .action-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.16);
+      border-color: rgba(37, 99, 235, 0.45);
+      background: #ffffff;
+    }
+
+    .action-card.primary:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.38);
+    }
+
+    .arrow {
+      font-size: 1.15rem;
+    }
+
+    .sidebar {
+      flex: 1;
+      min-width: 210px;
+      max-width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .avatar-shell {
+      width: 160px;
+      height: 160px;
+      border-radius: 2rem;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: repeating-linear-gradient(
+        45deg,
+        #f9fafb,
+        #f9fafb 8px,
+        #e5e7eb 8px,
+        #e5e7eb 16px
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 0.5rem;
+    }
+
+    .avatar-shell img {
+      /* When you add a real photo, remove the background & border styles above. */
+      width: 100%;
+      height: 100%;
+      border-radius: 2rem;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sidebar-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 14rem;
+    }
+
+    footer {
+      margin-top: 1.25rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .card {
+        flex-direction: column-reverse;
+        padding: 1.75rem 1.5rem 1.9rem;
+        gap: 2rem;
+      }
+
+      .sidebar {
+        flex-direction: row;
+        justify-content: flex-start;
+        max-width: 100%;
+        gap: 1rem;
+      }
+
+      .avatar-shell {
+        width: 96px;
+        height: 96px;
+        border-radius: 1.25rem;
+      }
+
+      .sidebar-note {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="card">
+      <div class="content">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <!-- TODO: You can edit this tagline if you like -->
+          RESECON 490AI · AI in Economics
+        </div>
+
+        <!-- TODO: Replace with your name -->
+        <h1>Dhrut Buch</h1>
+
+        <!-- TODO: Replace this with your own short professional description -->
+        <p class="subheading">
+          Managerial Economics student focused on applying AI and data analytics to logistics, supply-chain optimization, and operational decision-making.
+        </p>
+
+        <div class="meta-row">
+          <!-- Feel free to edit or remove these chips -->
+          <span class="meta-chip">B.S. Managerial Economics</span>
+          
+        </div>
+
+        <div class="actions">
+          <!-- Resume card -->
+          <!-- TODO: Make sure resume.pdf exists at the correct path -->
+          <a class="action-card primary" href="resume.pdf" target="_blank" rel="noopener">
+            <div class="action-label">Document</div>
+            <div class="action-title">
+              Resume
+              <span class="arrow">↗</span>
+            </div>
+            <div class="action-desc">
+              View a PDF version of my current resume.
+            </div>
+          </a>
+
+          <!-- Projects card -->
+          <!-- TODO: Ensure project.html file exists at this path -->
+          <a class="action-card" href="project.html">
+            <div class="action-label">Course Work</div>
+            <div class="action-title">
+              AI Class Projects
+              <span class="arrow">→</span>
+            </div>
+            <div class="action-desc">
+              Explore my AI in Economics course project and related work.
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <!-- Optional profile image placeholder -->
+        <!-- TODO: To use a real photo, replace the inner text with an <img> tag.
+             Example:
+             <img src="images/profile.jpg" alt="Portrait of Dhrut Buch" />
+        -->
+        <div class="avatar-shell">
+          Add profile.jpg here
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      © <span id="year"></span> <!-- TODO: You can hardcode your name if you like -->Dhrut Buch
+    </footer>
+  </div>
+
+  <script>
+    // Keep the year automatically up to date
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
